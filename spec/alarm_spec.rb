@@ -105,4 +105,21 @@ describe Icalendar::Alarm do
     end
   end
 
+  describe '#parse valarm' do
+    let(:source) { File.read File.join(File.dirname(__FILE__), 'fixtures', 'valarm_respond_to.ics') }
+    let(:cals  ) { Icalendar.parse(source) }
+    
+    it 'returns an array of calendars' do
+      expect(cals      ).to be_instance_of Array
+      expect(cals.count).to eq 1
+      expect(cals.first).to be_instance_of Icalendar::Calendar
+    end
+    
+    it 'reads respond_to' do
+      alarm = cals.first.events.first.alarms[1]
+      expect( alarm            ).to be_instance_of Icalendar::Alarm
+      expect( alarm.related_to ).to eq "6EFE9880-0FAD-4538-9D7D-E75993B2D07A"
+    end
+    
+  end
 end

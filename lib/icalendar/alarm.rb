@@ -15,7 +15,7 @@ module Icalendar
     optional_single_property :repeat, Icalendar::Values::Integer
 
     optional_property :attach, Icalendar::Values::Uri
-
+    optional_single_property :related_to
     # not part of base spec - need better abstraction for extensions
     optional_single_property :uid
     optional_single_property :acknowledged, Icalendar::Values::DateTime
